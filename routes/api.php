@@ -21,7 +21,7 @@ Route::prefix('v1')->group(function () {
     Route::post('admin/items', [ItemController::class, 'createItem']);
     Route::put('admin/items/{id}', [ItemController::class, 'updateItem']);
     // Rutas para el controlador de ataque
-    Route::post('attacks/{attackerId}/{defenderId}/{attackType}', [AttackController::class, 'attack']);
+    Route::post('attacks', [AttackController::class, 'attack']);
     // Rutas para el controlador del inventario del player
     Route::post('items/equip/{playerId}', [InventoryItemController::class, 'equipItem']);
     Route::post('items/unequip/{playerId}', [InventoryItemController::class, 'unequipItem']);

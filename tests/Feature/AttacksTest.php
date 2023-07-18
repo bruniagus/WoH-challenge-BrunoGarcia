@@ -36,7 +36,11 @@ class AttacksTest extends TestCase
         ]);
 
 
-        $response = $this->post('/api/v1/attacks/' . $player_1->id .'/'. $player_2->id .'/melee');
+        $response = $this->post('/api/v1/attacks/',[
+            "attackerId" => $player_1->id,
+            "defenderId" => $player_2->id,
+            "attackType" => "melee"
+        ]);
 
         // Verifica el estado de la respuesta
         $response->assertStatus(200);
@@ -61,7 +65,11 @@ class AttacksTest extends TestCase
         ]);
 
 
-        $response = $this->post('/api/v1/attacks/' . $player_1->id .'/'. $player_2->id .'/ranged');
+        $response = $this->post('/api/v1/attacks/',[
+            "attackerId" => $player_1->id,
+            "defenderId" => $player_2->id,
+            "attackType" => "ranged"
+        ]);
 
         // Verifica el estado de la respuesta
         $response->assertStatus(200);
@@ -86,7 +94,11 @@ class AttacksTest extends TestCase
         ]);
 
 
-        $response = $this->post('/api/v1/attacks/' . $player_1->id .'/'. $player_2->id .'/ulti');
+        $response = $this->post('/api/v1/attacks/',[
+            "attackerId" => $player_1->id,
+            "defenderId" => $player_2->id,
+            "attackType" => "ulti"
+        ]);
 
         // Verifica el estado de la respuesta
         $response->assertStatus(400);
@@ -109,8 +121,18 @@ class AttacksTest extends TestCase
             'health' => 100,
         ]);
 
-        $this->post('/api/v1/attacks/' . $player_1->id .'/'. $player_2->id .'/melee');
-        $response = $this->post('/api/v1/attacks/' . $player_1->id .'/'. $player_2->id .'/ulti');
+        $response = $this->post('/api/v1/attacks/',[
+            "attackerId" => $player_1->id,
+            "defenderId" => $player_2->id,
+            "attackType" => "melee"
+        ]);
+
+        $response = $this->post('/api/v1/attacks/',[
+            "attackerId" => $player_1->id,
+            "defenderId" => $player_2->id,
+            "attackType" => "ulti"
+        ]);
+
 
         // Verifica el estado de la respuesta
         $response->assertStatus(200);

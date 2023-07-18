@@ -16,15 +16,6 @@ class AttackPlayerControllerRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'attackerId' => (int) $this->attackerId,
-            'defenderId' => (int) $this->defenderId,
-            'attackType' => $this->attackType,
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
