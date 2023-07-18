@@ -41,9 +41,9 @@ Este endpoint permite a un jugador atacar a otro jugador en el juego PvP.
 - URL: `/api/v1/attack`
 - Método: POST
 - Parámetros de la solicitud:
-  - `attackerId` (integer): El ID del jugador atacante.
-  - `defenderId` (integer): El ID del jugador defensor.
-  - `attackType` (string): El tipo de ataque. Valores posibles: `melee`, `ranged`, `ulti`.
+  - `attacker_id` (integer): El ID del jugador atacante.
+  - `defender_id` (integer): El ID del jugador defensor.
+  - `attack_type` (string): El tipo de ataque. Valores posibles: `melee`, `ranged`, `ulti`.
 
 ### Ejemplo de solicitud
 
@@ -65,7 +65,7 @@ Este endpoint permite a un jugador equipar un iteam.
 - URL: `/api/v1/items/equip/{player_id}`
 - Método: POST
 - Parámetros de la solicitud:
-  - `itemId` (integer): El ID del Item.
+  - `item_id` (integer): El ID del Item.
 
 ### Ejemplo de solicitud
 
@@ -74,7 +74,7 @@ POST /api/v1/items/equip/1
 Content-Type: application/json
 
 {
-  "itemId": 1
+  "item_id": 1
 }
 ```
 
@@ -85,7 +85,7 @@ Este endpoint permite a un jugador desequipar un iteam.
 - URL: `/api/v1/items/unequip/{player_id}`
 - Método: POST
 - Parámetros de la solicitud:
-  - `itemId` (integer): El ID del Item.
+  - `item_id` (integer): El ID del Item.
 
 ### Ejemplo de solicitud
 
@@ -94,7 +94,7 @@ POST /api/v1/items/unequip/1
 Content-Type: application/json
 
 {
-  "itemId": 1
+  "item_id": 1
 }
 ```
 
@@ -105,7 +105,7 @@ Este endpoint permite a un jugador agregar un item en el inventario.
 - URL: `/api/v1/items/inventory/{player_id}`
 - Método: POST
 - Parámetros de la solicitud:
-  - `itemId` (integer): El ID del Item.
+  - `item_id` (integer): El ID del Item.
 
 ### Ejemplo de solicitud
 
@@ -114,7 +114,7 @@ POST /api/v1/items/inventory/1
 Content-Type: application/json
 
 {
-  "itemId": 1
+  "item_id": 1
 }
 ```
 
@@ -136,9 +136,9 @@ POST /api/v1/admin/players
 Content-Type: application/json
 
 {
-  "itemId": "player_1",
-  "itemId": "player@player.com",
-  "itemId": "human"
+  "name": "player_1",
+  "email": "player@player.com",
+  "type": "human"
 }
 ```
 
@@ -151,8 +151,8 @@ Este endpoint permite el administrador podra crear un nuevo item.
 - Parámetros de la solicitud:
   - `name` (string): Nombre del item.
   - `type` (string): El tipo del item. Valores posibles: `boot`, `armor`, `weapon`.
-   - `defense_points` (integer): cantidad de puntos de defensa.
-   - `attack_points` (integer): cantidad de puntos de ataque.
+  - `defense_points` (integer): cantidad de puntos de defensa.
+  - `attack_points` (integer): cantidad de puntos de ataque.
 ### Ejemplo de solicitud
 
 ```http
@@ -171,13 +171,13 @@ Content-Type: application/json
 
 Este endpoint permite el administrador podra editar un item.
 
-- URL: `/api/v1/admin/items/{itemId}`
+- URL: `/api/v1/admin/items/{item_id}`
 - Método: PUT
 - Parámetros de la solicitud:
   - `name` (string): Nombre del item.
   - `type` (string): El tipo del item. Valores posibles: `boot`, `armor`, `weapon`.
-   - `defense_points` (integer): cantidad de puntos de defensa.
-   - `attack_points` (integer): cantidad de puntos de ataque.
+  - `defense_points` (integer): cantidad de puntos de defensa.
+  - `attack_points` (integer): cantidad de puntos de ataque.
 ### Ejemplo de solicitud
 
 ```http
