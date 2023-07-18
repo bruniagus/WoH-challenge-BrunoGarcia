@@ -1,74 +1,58 @@
-# World of HIT (WoH) - Backend Challenge
+
+Para iniciar se debe inicializar con 
+```
+docker-compose up
+```
+Instalamos composer en el proyecto
+
+```
+docker-compose exec app composer install
+```
+
+Se tiene que correr las migraciones y los seeders , como lo tengo inicializado en l maqiona de ubuntu yo pongo el siguiente comando para que docker sepa que estoy en ese imagen
+
+```
+docker-compose exec app php artisan migrate
+```
+
+```
+docker-compose exec app php artisan migrate --database=sqlite
+```
 
 
-Bienvenidos a World of HIT A.K.A. WoH. WoH es un juego MMORPG NO LINEAL.
+inicializamos el server con el siguietne comando
 
-El objetivo principal de este ejercicio es evaluar tu proceso para resolver problemas, como tu habilidad para escribir codigo entendible, limpio y reusable. No hay reglas estrictas o preguntas engañosas.
+```
+docker-compose exec app php artisan serve --host 0.0.0.0 --port 8000
+```
 
-## Introducción
+Para correr los test 
 
+```
+docker-compose exec app php artisan php artisan test
+```
 
-Queremos desarrollar una API para un juego PvP (Player vs. Player) donde dos jugadores se enfrentarán hasta que solo uno quede en pie. Los jugadores podrán tener equipados items que los ayuden en sus batallas.
+Rutas
 
-## 📜 Instrucciones
+## Atacar a un jugador
 
+Este endpoint permite a un jugador atacar a otro jugador en el juego PvP.
 
-### 🙍🏻‍♂️Jugador
+- URL: `/api/v1/attack`
+- Método: POST
+- Parámetros de la solicitud:
+  - `attacker_id` (integer): El ID del jugador atacante.
+  - `defender_id` (integer): El ID del jugador defensor.
+  - `attack_type` (string): El tipo de ataque. Valores posibles: `melee`, `ranged`, `ulti`.
 
-- Cada jugador tiene:
-    - Nombre
-    - Email
-    - Tipo
-        - 👨🏻Humano
-        - 🧟‍♂️Zombie
-- Al crearse un jugador comienza con ❤️ 100 puntos de vida.
-- Si el jugador no tiene items, por defecto tiene 5 puntos de ataque 🗡 y 5 puntos de defensa 🛡.
-- Los puntos de ataque 🗡 de un jugador están dados por sus 5 puntos + la sumatoria de puntos ataque de sus items.
-- Los puntos de defensa 🛡 de un jugador están dados por sus 5 puntos + la sumatoria de puntos de defensa de sus items.
+### Ejemplo de solicitud
 
-### ⚒ Items
+```http
+POST /api/v1/attack
+Content-Type: application/json
 
-- Cada item tiene:
-    - Nombre
-    - Tipo
-        - 🥾Bota
-        - 🧥Armadura
-        - ⚔️ Arma
-    - Cantidad de puntos de defensa 🛡. Pueden ser 0.
-    - Cantidad de puntos de ataque 🗡. Pueden ser 0.
-- Un jugador puede tener equipado solo un item de cada tipo, pero puede tener un inventario con todos los items que quiera.
-
-### 🤺Ataque
-
-- Existen tres tipos de ataque:
-    - Cuerpo a cuerpo ⚔️. Daño total = Puntos de ataque.
-    - A distancia 🏹. Daño total = Puntos de ataque * 0.8.
-    - Ulti 💀. Daño total = Puntos de ataque x 2.
-- Cada ataque le resta vida al otro jugador. La cantidad de vida que pierde el defensor es Daño total ataque - Puntos de defensa del defensor.
-- Como minimo un ataque saca 1 punto de ❤️ vida al defensor.
-- Para tirar la Ulti el último ataque tuvo que haber sido un ataque cuerpo a cuerpo.
-- No se puede atacar a jugadores que ya están muertos.
-
-## ✅ Tareas
-
-
-Definir una REST API que permita cumplir con los siguientes requerimientos.
-
-- Como administrador quiero dar de alta un jugador.
-- Como administrador quiero dar de alta y modificar items.
-- Como jugador quiero equiparme un item.
-- Como jugador quiero atacar a otro jugador con un golpe cuerpo a cuerpo.
-- Como jugador quiero atacar a otro jugador con un golpe a distancia.
-- Como jugador quiero atacar a otro jugador con mi ulti.
-- Como administrador queremos ver que jugadores pueden tirar su ulti.
-
-**Extras**
-
-- Hacer test unitarios
-- Hostear la solucion
-
-## 🤝 Entregable
-
-
-- Se debe entregar un repo de github con la solución
-- Puede estar programado en cualquier framework MVC. (si es en laravel mejor)
+{
+  "attacker_id": 1,
+  "defender_id": 2,
+  "attack_type": "melee"
+}
