@@ -1,0 +1,27 @@
+# Ignore vendor directory
+/vendor/
+
+# Ignore node modules directory
+/node_modules/
+
+# Ignore compiled assets
+/public/css/
+/public/js/
+/mysql/
+# Ignore storage logs
+/storage/logs/
+
+# Ignore IDE and editor specific files
+/.idea/
+/.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore SQLite database file
+/database/*.sqlite
+
+# Ignore Homestead Vagrant environment
+Homestead.yaml
+Homestead.json
+/Vagrantfile
+/.vagrant/
