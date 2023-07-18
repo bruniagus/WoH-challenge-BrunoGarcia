@@ -19,15 +19,15 @@ class EquipItemPlayerControllerRequest extends FormRequest
     public function rules()
     {
         return [
-            'playerId' => 'required|exists:players,id',
-            'itemId' => 'required|exists:items,id',
+            'player_id' => 'required|exists:players,id',
+            'item_id' => 'required|exists:items,id',
         ];
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
-            'playerId' => (int) $this->playerId
+            'player_id' => (int) $this->player_id
         ]);
     }
 }

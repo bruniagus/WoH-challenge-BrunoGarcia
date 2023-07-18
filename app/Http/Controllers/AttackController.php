@@ -12,12 +12,12 @@ class AttackController extends Controller
     {
         try {
             // Crear y despachar el trabajo de ataque en la cola
-            AttackJob::dispatch($request->attackerId, $request->defenderId, $request->attackType)
+            AttackJob::dispatch($request->attacker_id, $request->defender_id, $request->attack_type)
                 ->onQueue('attacks');
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()],400);
         }
         // Respuesta con el resultado del ataque
-        return response()->json(['message' => $request->attackType.' attack successful.'], 200);
+        return response()->json(['message' => $request->attack_type.' attack successful.'], 200);
     }
 }

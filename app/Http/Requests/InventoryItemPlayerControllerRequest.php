@@ -19,15 +19,15 @@ class InventoryItemPlayerControllerRequest extends FormRequest
     public function rules()
     {
         return [
-            'playerId' => 'required|exists:players,id',
-            'itemId' => 'required|exists:items,id',
+            'player_id' => 'required|exists:players,id',
+            'item_id' => 'required|exists:items,id',
         ];
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
-            'playerId' => $this->playerId
+            'player_id' => $this->player_id
         ]);
     }
 }

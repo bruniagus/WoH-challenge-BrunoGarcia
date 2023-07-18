@@ -24,7 +24,7 @@ class ItemController extends Controller
 
     public function updateItem(UpdateItemAdminControllerRequest $request)
     {
-        $item = Item::findOrFail($request->id);
+        $item = Item::findOrFail($request->item_id);
         $item->update($request->all());
 
         // Respuesta con el ítem actualizado

@@ -15,22 +15,22 @@ class AttackJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $attackerId;
-    protected $defenderId;
-    protected $attackType;
+    protected $attacker_id;
+    protected $defender_id;
+    protected $attack_type;
 
-    public function __construct($attackerId, $defenderId, $attackType)
+    public function __construct($attacker_id, $defender_id, $attack_type)
     {
-        $this->attackerId = $attackerId;
-        $this->defenderId = $defenderId;
-        $this->attackType = $attackType;
+        $this->attacker_id = $attacker_id;
+        $this->defender_id = $defender_id;
+        $this->attack_type = $attack_type;
     }
 
     public function handle()
     {
         
-        $attacker = Player::findOrFail($this->attackerId);
-        $defender = Player::findOrFail($this->defenderId);
+        $attacker = Player::findOrFail($this->attacker_id);
+        $defender = Player::findOrFail($this->defender_id);
         
 
         // Verificar si el atacante está muerto
@@ -40,7 +40,7 @@ class AttackJob implements ShouldQueue
         if ($defender->health <= 0 || $defender->is_dead == true)  throw new \Exception('The defender is already dead.');
     
         // Establecer la estrategia de ataque según el tipo de ataque
-        switch ($this->attackType) {
+        switch ($this->attack_type) {
             case 'melee':
                 $attacker->setAttackStrategy(new MeleeAttackStrategy());
                 break;
@@ -70,7 +70,7 @@ class AttackJob implements ShouldQueue
         LogAttack::create([
             'attacker_id' => $attacker->id,
             'defender_id' => $defender->id,
-            'attack_type' => $this->attackType,
+            'attack_type' => $this->attack_type,
             'damage' => $damage,
         ]);
     

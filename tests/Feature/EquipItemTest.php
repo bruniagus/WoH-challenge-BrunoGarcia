@@ -44,7 +44,7 @@ class EquipItemTest extends TestCase
 
         
         $response = $this->post('/api/v1/items/equip/' . $player->id, [
-            'itemId' => $item->id,
+            'item_id' => $item->id,
         ]);
 
         // Verifica el estado de la respuesta
@@ -83,7 +83,7 @@ class EquipItemTest extends TestCase
 
         
         $response = $this->post('/api/v1/items/equip/' . $player->id, [
-            'itemId' => $item->id,
+            'item_id' => $item->id,
         ]);
 
         // Verifica el estado de la respuesta
@@ -116,7 +116,7 @@ class EquipItemTest extends TestCase
 
         
         $response = $this->post('/api/v1/items/equip/' . $player->id, [
-            'itemId' => $item->id,
+            'item_id' => $item->id,
         ]);
 
         // Verifica el estado de la respuesta
@@ -168,7 +168,7 @@ class EquipItemTest extends TestCase
 
         
         $response = $this->post('/api/v1/items/equip/' . $player->id, [
-            'itemId' => $item_2->id,
+            'item_id' => $item_2->id,
         ]);
 
         // Verifica el estado de la respuesta

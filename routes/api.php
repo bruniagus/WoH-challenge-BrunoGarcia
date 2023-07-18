@@ -19,11 +19,11 @@ Route::prefix('v1')->group(function () {
     Route::post('admin/players', [PlayerController::class, 'createPlayer']);
     Route::get('admin/ultis', [PlayerController::class, 'getPlayersWithUlti']);
     Route::post('admin/items', [ItemController::class, 'createItem']);
-    Route::put('admin/items/{id}', [ItemController::class, 'updateItem']);
+    Route::put('admin/items/{item_id}', [ItemController::class, 'updateItem']);
     // Rutas para el controlador de ataque
     Route::post('attacks', [AttackController::class, 'attack']);
     // Rutas para el controlador del inventario del player
-    Route::post('items/equip/{playerId}', [InventoryItemController::class, 'equipItem']);
-    Route::post('items/unequip/{playerId}', [InventoryItemController::class, 'unequipItem']);
-    Route::post('items/inventory/{playerId}', [InventoryItemController::class, 'inventoryItem']);
+    Route::post('items/equip/{player_id}', [InventoryItemController::class, 'equipItem']);
+    Route::post('items/unequip/{player_id}', [InventoryItemController::class, 'unequipItem']);
+    Route::post('items/inventory/{player_id}', [InventoryItemController::class, 'inventoryItem']);
 });

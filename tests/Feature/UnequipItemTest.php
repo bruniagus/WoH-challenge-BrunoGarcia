@@ -44,7 +44,7 @@ class UnequipItemTest extends TestCase
 
         
         $response = $this->post('/api/v1/items/unequip/' . $player->id, [
-            'itemId' => $item->id,
+            'item_id' => $item->id,
         ]);
 
         // Verifica el estado de la respuesta
@@ -83,7 +83,7 @@ class UnequipItemTest extends TestCase
 
         
         $response = $this->post('/api/v1/items/unequip/' . $player->id, [
-            'itemId' => $item->id,
+            'item_id' => $item->id,
         ]);
 
         // Verifica el estado de la respuesta

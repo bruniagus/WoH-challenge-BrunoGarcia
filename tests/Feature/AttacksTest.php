@@ -37,9 +37,9 @@ class AttacksTest extends TestCase
 
 
         $response = $this->post('/api/v1/attacks/',[
-            "attackerId" => $player_1->id,
-            "defenderId" => $player_2->id,
-            "attackType" => "melee"
+            "attacker_id" => $player_1->id,
+            "defender_id" => $player_2->id,
+            "attack_type" => "melee"
         ]);
 
         // Verifica el estado de la respuesta
@@ -66,9 +66,9 @@ class AttacksTest extends TestCase
 
 
         $response = $this->post('/api/v1/attacks/',[
-            "attackerId" => $player_1->id,
-            "defenderId" => $player_2->id,
-            "attackType" => "ranged"
+            "attacker_id" => $player_1->id,
+            "defender_id" => $player_2->id,
+            "attack_type" => "ranged"
         ]);
 
         // Verifica el estado de la respuesta
@@ -95,9 +95,9 @@ class AttacksTest extends TestCase
 
 
         $response = $this->post('/api/v1/attacks/',[
-            "attackerId" => $player_1->id,
-            "defenderId" => $player_2->id,
-            "attackType" => "ulti"
+            "attacker_id" => $player_1->id,
+            "defender_id" => $player_2->id,
+            "attack_type" => "ulti"
         ]);
 
         // Verifica el estado de la respuesta
@@ -122,15 +122,15 @@ class AttacksTest extends TestCase
         ]);
 
         $response = $this->post('/api/v1/attacks/',[
-            "attackerId" => $player_1->id,
-            "defenderId" => $player_2->id,
-            "attackType" => "melee"
+            "attacker_id" => $player_1->id,
+            "defender_id" => $player_2->id,
+            "attack_type" => "melee"
         ]);
 
         $response = $this->post('/api/v1/attacks/',[
-            "attackerId" => $player_1->id,
-            "defenderId" => $player_2->id,
-            "attackType" => "ulti"
+            "attacker_id" => $player_1->id,
+            "defender_id" => $player_2->id,
+            "attack_type" => "ulti"
         ]);
 
 

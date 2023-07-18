@@ -10,8 +10,8 @@ class InventoryItemController extends Controller
 {
     public function equipItem(EquipItemPlayerControllerRequest $request)
     {
-        $player = Player::findOrFail($request->playerId);
-        $item = Item::findOrFail($request->itemId);
+        $player = Player::findOrFail($request->player_id);
+        $item = Item::findOrFail($request->item_id);
 
         // Verificar si el ítem existe en el inventario del jugador
         $inventoryItem = $this->getInventoryitemById($player->id,$item->id);
@@ -44,8 +44,8 @@ class InventoryItemController extends Controller
 
     public function inventoryItem(InventoryItemPlayerControllerRequest $request)
     {
-        $player = Player::findOrFail($request->playerId);
-        $item = Item::findOrFail($request->itemId);
+        $player = Player::findOrFail($request->player_id);
+        $item = Item::findOrFail($request->item_id);
 
         // Verificar si el ítem existe en el inventario del jugador
         $inventoryItem = $this->getInventoryitemById($player->id,$item->id);
@@ -62,8 +62,8 @@ class InventoryItemController extends Controller
 
     public function unequipItem(UnequipItemPlayerControllerRequest $request)
     {
-        $player = Player::findOrFail($request->playerId);
-        $item = Item::findOrFail($request->itemId);
+        $player = Player::findOrFail($request->player_id);
+        $item = Item::findOrFail($request->item_id);
 
         $inventoryItem = $this->getInventoryitemById($player->id,$item->id);
         

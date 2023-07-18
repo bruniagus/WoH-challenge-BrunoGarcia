@@ -24,16 +24,16 @@ class AttackPlayerControllerRequest extends FormRequest
     public function rules()
     {
         return [
-            'attackerId' => 'required|exists:players,id',
-            'defenderId' => ['required','exists:players,id',$this->differentAttack()],
-            'attackType' => 'required|in:melee,ranged,ulti',
+            'attacker_id' => 'required|exists:players,id',
+            'defender_id' => ['required','exists:players,id',$this->differentAttack()],
+            'attack_type' => 'required|in:melee,ranged,ulti',
         ];
     }
 
     public function differentAttack()
     {
         return function ($attribute, $value, $fail) {
-            if ($value == $this->attackerId) {
+            if ($value == $this->attacker_id) {
                 $fail("The attacker and defender cannot be the same");
             }
         };

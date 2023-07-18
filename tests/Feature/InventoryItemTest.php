@@ -38,7 +38,7 @@ class InventoryItemTest extends TestCase
 
         
         $response = $this->post('/api/v1/items/inventory/' . $player->id, [
-            'itemId' => $item->id,
+            'item_id' => $item->id,
         ]);
 
         // Verifica el estado de la respuesta
@@ -77,7 +77,7 @@ class InventoryItemTest extends TestCase
 
         
         $response = $this->post('/api/v1/items/inventory/' . $player->id, [
-            'itemId' => $item->id,
+            'item_id' => $item->id,
         ]);
 
         // Verifica el estado de la respuesta
