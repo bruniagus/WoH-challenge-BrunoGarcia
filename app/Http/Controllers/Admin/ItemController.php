@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 
 class ItemController extends Controller
 {
-
     public function createItem(CreateItemAdminControllerRequest $request)
     {
         $item = Item::create([

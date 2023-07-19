@@ -12,17 +12,9 @@ class LogAttackTest extends TestCase
     public function testLogAttackCreation()
     {
         // Crea un jugador utilizando el modelo Player
-        $player_1 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-        ]);
+        $player_1 = $this->createUserFaker();
 
-        $player_2 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-        ]);
+        $player_2 = $this->createUserFaker();
 
         // Crea un LogAttack asociado al jugador
         $logAttack = LogAttack::create([

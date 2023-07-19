@@ -32,18 +32,9 @@ class PlayerTest extends TestCase
     public function testPlayerAttackPoints()
     {
         // Crea un jugador con un item de ataque que suma 10 puntos de ataque
-        $player = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-        ]);
+        $player = $this->createUserFaker();
 
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 10,
-            'defense_points' => 0,
-        ]);
+        $item = $this->createItemFaker();
 
         $player->inventoryItems()->create([
             'player_id' => $player->id,
@@ -53,16 +44,12 @@ class PlayerTest extends TestCase
 
         // Verifica que los puntos de ataque se calculen correctamente
         $player->setAttackStrategy(new MeleeAttackStrategy());
-        $this->assertEquals(15, $player->getAttackDamage());
+        $this->assertEquals($player::BASE_ATTACK + $item->attack_points, $player->getAttackDamage());
 
         $player->setAttackStrategy(new RangedAttackStrategy());
-        $this->assertEquals(12, $player->getAttackDamage());
+        $this->assertEquals(round(($player::BASE_ATTACK + $item->attack_points) * 0.8), $player->getAttackDamage());
 
-        $player_2 = Player::create([
-            'name' => 'John Doe 2',
-            'email' => 'johndoe2@example.com',
-            'type' => 'zombie',
-        ]);
+        $player_2 = $this->createUserFaker();
 
         $player->logAttacks()->create([
             'attacker_id' => $player->id,
@@ -72,24 +59,15 @@ class PlayerTest extends TestCase
         ]);
 
         $player->setAttackStrategy(new UltiAttackStrategy());
-        $this->assertEquals(30, $player->getAttackDamage());
+        $this->assertEquals(($player::BASE_ATTACK + $item->attack_points) * 2, $player->getAttackDamage());
     }
 
     public function testPlayerDefensePoints()
     {
         // Crea un jugador con un item de defensa que suma 5 puntos de defensa
-        $player = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-        ]);
+        $player = $this->createUserFaker();
 
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 0,
-            'defense_points' => 5,
-        ]);
+        $item = $this->createItemFaker();
 
         $player->inventoryItems()->create([
             'player_id' => $player->id,
@@ -98,6 +76,6 @@ class PlayerTest extends TestCase
         ]);
 
         // Verifica que los puntos de defensa se calculen correctamente
-        $this->assertEquals(10, $player->calculateDefensePoints());
+        $this->assertEquals($player::BASE_DEFENSE + $item->defense_points, $player->calculateDefensePoints());
     }
 }

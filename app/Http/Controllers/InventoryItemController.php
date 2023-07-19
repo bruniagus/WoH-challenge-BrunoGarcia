@@ -16,12 +16,11 @@ class InventoryItemController extends Controller
         // Verificar si el ítem existe en el inventario del jugador
         $inventoryItem = $this->getInventoryitemById($player->id,$item->id);
 
-        if (!$inventoryItem)  return response()->json(['message' => 'The item does not exist in the player\'s inventory.'], 400);
+        if (!$inventoryItem) return response()->json(['message' => 'The item does not exist in the player\'s inventory.'], 400);
 
         // Verificar si el ítem ya está equipado
         if ($inventoryItem->equipped) return response()->json(['message' => 'The item is already equipped.'], 400);
         
-
         // Verificar si ya se tiene equipado un ítem del mismo tipo
         $existingItem = InventoryItem::where('player_id', $player->id)
             ->where('equipped', true)
@@ -36,9 +35,6 @@ class InventoryItemController extends Controller
         $inventoryItem->update(['equipped' => true]);
 
         // Respuesta con el ítem del inventario actualizado
-
-      
-
         return response()->json($inventoryItem, 200);
     }
 

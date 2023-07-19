@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class LogAttack extends Model
 {
     use HasFactory;
+    
     protected $fillable = ['attacker_id', 'defender_id', 'attack_type', 'damage'];
 
     public function attacker()

@@ -21,21 +21,9 @@ class InventoryItemTest extends TestCase
     public function testUnequipItem()
     {
         // Crea un jugador utilizando el modelo Player
-        $player = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
+        $player = $this->createUserFaker();
 
-
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 10,
-            'defense_points' => 0,
-        ]);
-
+        $item = $this->createItemFaker();
         
         $response = $this->post('/api/v1/items/inventory/' . $player->id, [
             'item_id' => $item->id,
@@ -54,20 +42,9 @@ class InventoryItemTest extends TestCase
     public function testInventoryButAlreadyHaveItem()
     {
         // Crea un jugador utilizando el modelo Player
-        $player = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
+        $player = $this->createUserFaker();
 
-
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 10,
-            'defense_points' => 0,
-        ]);
+        $item = $this->createItemFaker();
 
         $player->inventoryItems()->create([
             'player_id' => $player->id,

@@ -18,17 +18,17 @@ class AdminCreatePlayerTest extends TestCase
      */
     public function testAdminCreatePlayer()
     {
-        
+        $email = $this->faker->email;
         $response = $this->post('/api/v1/admin/players/', [
-            'name' => 'John',
-            'email' => 'john@example.com',
-            'type' => 'human'
+            'name' => $this->faker->name,
+            'email' => $email,
+            'type' => $this->faker->randomElement(['human', 'zombie'])
         ]);
 
         // Verifica el estado de la respuesta
         $response->assertStatus(201);
 
-        $inventoryItem = Player::where("email" ,'john@example.com')->first();
+        $inventoryItem = Player::where("email" ,$email)->first();
         
         $this->assertEquals(isset($inventoryItem), true);
     }
@@ -37,8 +37,8 @@ class AdminCreatePlayerTest extends TestCase
     {
         
         $response = $this->post('/api/v1/admin/players/', [
-            'name' => 'John',
-            'type' => 'human'
+            'name' => $this->faker->name,
+            'type' => $this->faker->randomElement(['human', 'zombie'])
         ]);
 
         // Verifica el estado de la respuesta
@@ -49,9 +49,9 @@ class AdminCreatePlayerTest extends TestCase
     {
         
         $response = $this->post('/api/v1/admin/players/', [
-            'name' => 'John',
+            'name' => $this->faker->name,
             'email' => 'john',
-            'type' => 'human'
+            'type' => $this->faker->randomElement(['human', 'zombie'])
         ]);
 
         // Verifica el estado de la respuesta
@@ -62,8 +62,8 @@ class AdminCreatePlayerTest extends TestCase
     {
         
         $response = $this->post('/api/v1/admin/players/', [
-            'email' => 'john@example.com',
-            'type' => 'human'
+            'email' => $this->faker->email,
+            'type' => $this->faker->randomElement(['human', 'zombie'])
         ]);
 
         // Verifica el estado de la respuesta
@@ -74,8 +74,8 @@ class AdminCreatePlayerTest extends TestCase
     {
         
         $response = $this->post('/api/v1/admin/players/', [
-            'name' => 'John',
-            'email' => 'john@example.com'
+            'name' => $this->faker->name,
+            'email' => $this->faker->email
         ]);
 
         // Verifica el estado de la respuesta
@@ -86,8 +86,8 @@ class AdminCreatePlayerTest extends TestCase
     {
         
         $response = $this->post('/api/v1/admin/players/', [
-            'name' => 'John',
-            'email' => 'john@example.com',
+            'name' => $this->faker->name,
+            'email' => $this->faker->email,
             'type' => 'human2'
         ]);
 

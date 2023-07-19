@@ -19,19 +19,14 @@ class AdminItemUpdateTest extends TestCase
     public function testAdminUpdateItem()
     {
 
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 10,
-            'defense_points' => 0,
-        ]);
+        $item = $this->createItemFaker();
 
         // Envía una solicitud put a la ruta con el jugador y el item
         $response = $this->put('/api/v1/admin/items/' . $item->id, [
-            'name' => 'John',
-            'type' => 'boot',
-            'defense_points' => 0,
-            'attack_points' => 0
+            'name' => $this->faker->name,
+            'type' => $this->faker->randomElement(['weapon', 'armor', 'boot']),
+            'defense_points' => $this->faker->numberBetween(0, 10),
+            'attack_points' => $this->faker->numberBetween(0, 10)
         ]);
 
         // Verifica el estado de la respuesta
@@ -40,18 +35,13 @@ class AdminItemUpdateTest extends TestCase
 
     public function testAdminUpdateItemButNoSendName()
     {
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 10,
-            'defense_points' => 0,
-        ]);
+        $item = $this->createItemFaker();
 
         // Envía una solicitud put a la ruta con el jugador y el item
         $response = $this->put('/api/v1/admin/items/' . $item->id, [
-            'type' => 'boot',
-            'defense_points' => 0,
-            'attack_points' => 0
+            'type' => $this->faker->randomElement(['weapon', 'armor', 'boot']),
+            'defense_points' => $this->faker->numberBetween(0, 10),
+            'attack_points' => $this->faker->numberBetween(0, 10)
         ]);
 
         // Verifica el estado de la respuesta
@@ -60,18 +50,13 @@ class AdminItemUpdateTest extends TestCase
 
     public function testAdminUpdateItemButNoSendType()
     {
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 10,
-            'defense_points' => 0,
-        ]);
+        $item = $this->createItemFaker();
 
         // Envía una solicitud put a la ruta con el jugador y el item
         $response = $this->put('/api/v1/admin/items/' . $item->id, [
-            'name' => 'John',
-            'defense_points' => 0,
-            'attack_points' => 0
+            'name' => $this->faker->name,
+            'defense_points' => $this->faker->numberBetween(0, 10),
+            'attack_points' => $this->faker->numberBetween(0, 10)
         ]);
 
         // Verifica el estado de la respuesta
@@ -80,18 +65,13 @@ class AdminItemUpdateTest extends TestCase
 
     public function testAdminUpdateItemButNoSendDefensePoints()
     {
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 10,
-            'defense_points' => 0,
-        ]);
+        $item = $this->createItemFaker();
 
         // Envía una solicitud put a la ruta con el jugador y el item
         $response = $this->put('/api/v1/admin/items/' . $item->id, [
-            'name' => 'John',
-            'type' => 'boot',
-            'attack_points' => 0
+            'name' => $this->faker->name,
+            'type' => $this->faker->randomElement(['weapon', 'armor', 'boot']),
+            'attack_points' => $this->faker->numberBetween(0, 10)
         ]);
 
         // Verifica el estado de la respuesta
@@ -100,18 +80,13 @@ class AdminItemUpdateTest extends TestCase
 
     public function testAdminUpdateItemButNoSendAttackPoints()
     {
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 10,
-            'defense_points' => 0,
-        ]);
+        $item = $this->createItemFaker();
 
         // Envía una solicitud put a la ruta con el jugador y el item
         $response = $this->put('/api/v1/admin/items/' . $item->id, [
-            'name' => 'John',
-            'type' => 'boot',
-            'defense_points' => 0
+            'name' => $this->faker->name,
+            'type' => $this->faker->randomElement(['weapon', 'armor', 'boot']),
+            'defense_points' => $this->faker->numberBetween(0, 10)
         ]);
 
         // Verifica el estado de la respuesta
@@ -120,19 +95,14 @@ class AdminItemUpdateTest extends TestCase
 
     public function testAdminUpdateItemButSendInvalidType()
     {
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 10,
-            'defense_points' => 0,
-        ]);
+        $item = $this->createItemFaker();
 
         // Envía una solicitud put a la ruta con el jugador y el item
         $response = $this->put('/api/v1/admin/items/' . $item->id, [
-            'name' => 'John',
-            'type' => 'boot2',
-            'defense_points' => 0,
-            'attack_points' => 0
+            'name' => $this->faker->name,
+            'type' => 'weapon_2',
+            'defense_points' => $this->faker->numberBetween(0, 10),
+            'attack_points' => $this->faker->numberBetween(0, 10)
         ]);
 
         // Verifica el estado de la respuesta

@@ -11,8 +11,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Player extends Model
 {
     use Notifiable ,HasFactory;
-    private const BASE_ATTACK = 5;
-    private const BASE_DEFENSE = 5;
+
+    const BASE_ATTACK = 5;
+
+    const BASE_DEFENSE = 5;
+    
     protected $fillable = ['name', 'email', 'type', 'health'];
 
     protected $attackStrategy = null;

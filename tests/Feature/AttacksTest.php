@@ -21,20 +21,9 @@ class AttacksTest extends TestCase
     public function testAttackMelee()
     {
         // Crea un jugador utilizando el modelo Player
-        $player_1 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
+        $player_1 = $this->createUserFaker();
 
-        $player_2 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
-
+        $player_2 = $this->createUserFaker();
 
         $response = $this->post('/api/v1/attacks/',[
             "attacker_id" => $player_1->id,
@@ -50,20 +39,9 @@ class AttacksTest extends TestCase
     public function testAttackRanged()
     {
         // Crea un jugador utilizando el modelo Player
-        $player_1 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
+        $player_1 = $this->createUserFaker();
 
-        $player_2 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
-
+        $player_2 = $this->createUserFaker();
 
         $response = $this->post('/api/v1/attacks/',[
             "attacker_id" => $player_1->id,
@@ -79,20 +57,9 @@ class AttacksTest extends TestCase
     public function testAttackUltiWithoutFirstAttackMelee()
     {
         // Crea un jugador utilizando el modelo Player
-        $player_1 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
+        $player_1 = $this->createUserFaker();
 
-        $player_2 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
-
+        $player_2 = $this->createUserFaker();
 
         $response = $this->post('/api/v1/attacks/',[
             "attacker_id" => $player_1->id,
@@ -107,19 +74,9 @@ class AttacksTest extends TestCase
     public function testAttackUltiFirstAttackMelee()
     {
         // Crea un jugador utilizando el modelo Player
-        $player_1 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
+        $player_1 = $this->createUserFaker();
 
-        $player_2 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
+        $player_2 = $this->createUserFaker();
 
         $response = $this->post('/api/v1/attacks/',[
             "attacker_id" => $player_1->id,

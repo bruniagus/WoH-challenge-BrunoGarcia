@@ -24,12 +24,11 @@ class PlayerController extends Controller
     public function getPlayersWithUlti(Request $request)
     {
         $players = Player::get();
-        
         $playersWithUlti = [];
 
-        foreach ($players as $player) {
+        foreach ($players as $player)
             if($player->lastAttackWasMelee()) $playersWithUlti[] = $player;
-        }
+
         return response()->json($playersWithUlti);
     }
 }

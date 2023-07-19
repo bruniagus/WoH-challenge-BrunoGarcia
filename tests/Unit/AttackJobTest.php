@@ -15,25 +15,16 @@ class AttackJobTest extends TestCase
     public function testAttackJob()
     {
         // Crea un jugador atacante utilizando el modelo Player
-        $attacker = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100
-        ]);
+        $attacker = $this->createUserFaker();
 
         // Crea un jugador defensor utilizando el modelo Player
-        $defender = Player::create([
-            'name' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'type' => 'zombie',
-            'health' => 100
-        ]);
+        $defender = $this->createUserFaker();
 
         // Inicializa el job de ataque
         
 
-        $job = new AttackJob($attacker->id, $defender->id,'melee');
+        $job = new AttackJob($attacker->id, $defender->id,$this->getAttackTypeRandom() );
+
         dispatch_sync($job);
 
         $defender_update = Player::findOrFail($defender->id);
@@ -51,50 +42,35 @@ class AttackJobTest extends TestCase
     public function testDefenderDeadInAttackJob()
     {
         // Crea un jugador atacante utilizando el modelo Player
-        $attacker = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100
-        ]);
+        $attacker = $this->createUserFaker();
 
         // Crea un jugador defensor utilizando el modelo Player
-        $defender = Player::create([
-            'name' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'type' => 'zombie',
-            'is_dead' => true,
-            'health' => 0
-        ]);
+        $defender = $this->createUserFaker();
+        $defender->is_dead = true;
+        $defender->health = 0;
+        $defender->save();
 
         // Crea una instancia del Job AttackJob con los jugadores correspondientes
-        $job = new AttackJob($attacker->id, $defender->id,'melee');
+        $job = new AttackJob($attacker->id, $defender->id,$this->getAttackTypeRandom());
 
         // Ejecuta el Job
         $this->expectException(\Exception::class);
         $job->handle();
     }
 
-    public function testAttackDeadInAttackJob()
+    public function testAttackerDeadInAttackJob()
     {
         // Crea un jugador atacante utilizando el modelo Player
-        $attacker = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 0,
-            'is_dead' => true,
-        ]);
+        $attacker = $this->createUserFaker();
+        $attacker->is_dead = true;
+        $attacker->health = 0;
+        $attacker->save();
 
         // Crea un jugador defensor utilizando el modelo Player
-        $defender = Player::create([
-            'name' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'type' => 'zombie'
-        ]);
+        $defender = $this->createUserFaker();
 
         // Crea una instancia del Job AttackJob con los jugadores correspondientes
-        $job = new AttackJob($attacker->id, $defender->id,'melee');
+        $job = new AttackJob($attacker->id, $defender->id,$this->getAttackTypeRandom());
 
         // Ejecuta el Job
         $this->expectException(\Exception::class);
@@ -103,19 +79,12 @@ class AttackJobTest extends TestCase
 
     public function testInvalidTypeAttackAttackJob()
     {
+
         // Crea un jugador atacante utilizando el modelo Player
-        $attacker = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human'
-        ]);
+        $attacker = $this->createUserFaker();
 
         // Crea un jugador defensor utilizando el modelo Player
-        $defender = Player::create([
-            'name' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'type' => 'zombie'
-        ]);
+        $defender = $this->createUserFaker();
 
         // Crea una instancia del Job AttackJob con los jugadores correspondientes
         $job = new AttackJob($attacker->id, $defender->id,'melee_2');
@@ -128,19 +97,10 @@ class AttackJobTest extends TestCase
     public function testUltiNoBeforeThrowMeleeAttackJob()
     {
         // Crea un jugador atacante utilizando el modelo Player
-        $attacker = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human'
-        ]);
+        $attacker = $this->createUserFaker();
 
         // Crea un jugador defensor utilizando el modelo Player
-        $defender = Player::create([
-            'name' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'type' => 'zombie'
-        ]);
-
+        $defender = $this->createUserFaker();
         // Crea una instancia del Job AttackJob con los jugadores correspondientes
         $job = new AttackJob($attacker->id, $defender->id,'ulti');
 
@@ -152,19 +112,10 @@ class AttackJobTest extends TestCase
     public function testUltiBeforeThrowMeleeAttackJob()
     {
         // Crea un jugador atacante utilizando el modelo Player
-        $attacker = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human'
-        ]);
+        $attacker = $this->createUserFaker();
 
         // Crea un jugador defensor utilizando el modelo Player
-        $defender = Player::create([
-            'name' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'type' => 'zombie',
-            'health' => 100
-        ]);
+        $defender = $this->createUserFaker();
 
         // Crea una instancia del Job AttackJob con los jugadores correspondientes
         $job = new AttackJob($attacker->id, $defender->id,'melee');
@@ -195,19 +146,10 @@ class AttackJobTest extends TestCase
     public function testRangedAttackJob()
     {
         // Crea un jugador atacante utilizando el modelo Player
-        $attacker = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human'
-        ]);
+        $attacker = $this->createUserFaker();
 
         // Crea un jugador defensor utilizando el modelo Player
-        $defender = Player::create([
-            'name' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'type' => 'zombie',
-            'health' => 100
-        ]);
+        $defender = $this->createUserFaker();
 
         // Crea una instancia del Job AttackJob con los jugadores correspondientes
         $job = new AttackJob($attacker->id, $defender->id,'ranged');
@@ -229,19 +171,12 @@ class AttackJobTest extends TestCase
     public function testKillAttackJob()
     {
         // Crea un jugador atacante utilizando el modelo Player
-        $attacker = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human'
-        ]);
+        $attacker = $this->createUserFaker();
 
         // Crea un jugador defensor utilizando el modelo Player
-        $defender = Player::create([
-            'name' => 'Jane Smith',
-            'email' => 'janesmith@example.com',
-            'type' => 'zombie',
-            'health' => 1
-        ]);
+        $defender = $this->createUserFaker();
+        $defender->health = 1;
+        $defender->save();
 
         // Crea una instancia del Job AttackJob con los jugadores correspondientes
         $job = new AttackJob($attacker->id, $defender->id,'melee');

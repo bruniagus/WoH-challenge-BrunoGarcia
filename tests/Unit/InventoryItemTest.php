@@ -12,19 +12,10 @@ class InventoryItemTest extends TestCase
     public function testItemCreation()
     {
         // Crea un jugador utilizando el modelo Player
-        $player = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-        ]);
+        $player = $this->createUserFaker();
 
         // Crea un item utilizando el modelo Item
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'defense_points' => 5,
-            'attack_points' => 10,
-        ]);
+        $item = $this->createItemFaker();
 
         // Crea un InventoryItem asociando el jugador y el item
         $inventoryItem = InventoryItem::create([
@@ -43,19 +34,10 @@ class InventoryItemTest extends TestCase
     public function testInventoryItemRelations()
     {
         // Crea un jugador utilizando el modelo Player
-        $player = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-        ]);
+        $player = $this->createUserFaker();
 
         // Crea un item utilizando el modelo Item
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'defense_points' => 5,
-            'attack_points' => 10,
-        ]);
+        $item = $this->createItemFaker();
 
         // Crea un InventoryItem asociando el jugador y el item
         $inventoryItem = InventoryItem::create([

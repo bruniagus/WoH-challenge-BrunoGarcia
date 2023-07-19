@@ -19,26 +19,11 @@ class AdminUltisTest extends TestCase
      */
     public function testAdminUltis()
     {
-        $player_1 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100
-        ]);
+        $player_1 = $this->createUserFaker();
         
-        $player_2 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe2@example.com',
-            'type' => 'human',
-            'health' => 100
-        ]);
+        $player_2 = $this->createUserFaker();
 
-        $player_3 = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe3@example.com',
-            'type' => 'human',
-            'health' => 100
-        ]);
+        $player_3 = $this->createUserFaker();
         
         LogAttack::create([
             'attacker_id' => $player_1->id,

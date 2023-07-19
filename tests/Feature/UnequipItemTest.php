@@ -21,20 +21,8 @@ class UnequipItemTest extends TestCase
     public function testUnequipItem()
     {
         // Crea un jugador utilizando el modelo Player
-        $player = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
-
-
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 10,
-            'defense_points' => 0,
-        ]);
+        $player = $this->createUserFaker();
+        $item = $this->createItemFaker();
 
         $player->inventoryItems()->create([
             'player_id' => $player->id,
@@ -60,20 +48,8 @@ class UnequipItemTest extends TestCase
     public function testUnquipmentButAlreadyUnequippedItem()
     {
         // Crea un jugador utilizando el modelo Player
-        $player = Player::create([
-            'name' => 'John Doe',
-            'email' => 'johndoe@example.com',
-            'type' => 'human',
-            'health' => 100,
-        ]);
-
-
-        $item = Item::create([
-            'name' => 'Sword',
-            'type' => 'weapon',
-            'attack_points' => 10,
-            'defense_points' => 0,
-        ]);
+        $player = $this->createUserFaker();
+        $item = $this->createItemFaker();
 
         $player->inventoryItems()->create([
             'player_id' => $player->id,

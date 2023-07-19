@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Item extends Model
 {
     use HasFactory;
+    
     protected $fillable = ['name', 'type', 'defense_points', 'attack_points'];
 
     public function inventoryItems()
