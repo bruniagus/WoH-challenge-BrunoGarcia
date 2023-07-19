@@ -6,8 +6,8 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use App\Events\PlayerDefeated;
-use App\Listeners\{SendPlayerDefeatedNotification,PlayerDefeatedStatus};
+use App\Events\{PlayerDefeated,PlayerAttack};
+use App\Listeners\{SendPlayerDefeatedNotification,PlayerDefeatedStatus,CreateLogAttack,DefenderHealth};
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -23,6 +23,10 @@ class EventServiceProvider extends ServiceProvider
         PlayerDefeated::class => [
             SendPlayerDefeatedNotification::class,
             PlayerDefeatedStatus::class
+        ],
+        PlayerAttack::class => [
+            CreateLogAttack::class,
+            DefenderHealth::class
         ],
     ];
 

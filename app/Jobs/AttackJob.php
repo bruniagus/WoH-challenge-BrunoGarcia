@@ -9,7 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\{Player,LogAttack};
 use App\Strategies\Attack\{MeleeAttackStrategy,RangedAttackStrategy,UltiAttackStrategy};
-use App\Events\PlayerDefeated;
+use App\Events\{PlayerDefeated,PlayerAttack};
 
 class AttackJob implements ShouldQueue
 {
@@ -55,25 +55,14 @@ class AttackJob implements ShouldQueue
         }
         
         // Calcular el daño del ataque
-        $damage = $attacker->getAttackDamage();
-    
+        $damage = $attacker->getAttackDamage();    
         // Aplicar la defensa del defensor
         $damage -= $defender->calculateDefensePoints();
-    
         // Verificar que el daño mínimo sea 1
         $damage = max(1, $damage);
         
-        // Restar el daño a la salud del defensor
-        $defender->health -= $damage;
-        $defender->save();
-        // Guardar el ataque en el registro de log
-        LogAttack::create([
-            'attacker_id' => $attacker->id,
-            'defender_id' => $defender->id,
-            'attack_type' => $this->attack_type,
-            'damage' => $damage,
-        ]);
-    
+        event(new PlayerAttack($attacker,$defender,$this->attack_type,$damage));
+
         // Eventos por la muerte del defensor 
         if ($defender->health <= 0) event(new PlayerDefeated($defender));
     }
